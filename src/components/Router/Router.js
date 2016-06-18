@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import MapView from 'react-native-maps';
 import ChatMap from '../../containers/ChatMap';
+import Link from '../../containers/Link';
 
 class Router extends Component {
   render() {
@@ -16,8 +17,10 @@ class Router extends Component {
         page = <ChatMap/>
         break;
       case 'chat':
-        page = (<View>
-          <Text>Chat</Text>
+        page = (<View style={styles.container}>
+          <Link to='map'>
+            <Text>Chat {this.props.router.params.id}</Text>
+          </Link>
         </View>)
         break;
       default:

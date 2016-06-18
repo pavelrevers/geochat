@@ -29,15 +29,12 @@ class ChatMap extends Component {
                 }}
                 title={title}
                 onSelect={(data) => {
-                  console.log(data);
+                  this.props.changePage({name: 'chat', params: {id}})
                 }}
               />
             ))
           }
         </MapView>
-        <Link to="chat" params={{id: '1'}}>
-          <View style={styles.button}/>
-        </Link>
       </View>
     );
   }
