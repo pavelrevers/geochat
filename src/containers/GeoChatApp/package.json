@@ -1,0 +1,4 @@
+{
+  "name": "GeoChat app root container",
+  "main": "./GeoChatApp.js"
+}
