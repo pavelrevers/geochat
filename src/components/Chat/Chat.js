@@ -1,6 +1,6 @@
 'use strict';
 
-import React;
+import React from 'React';
 import { Component } from 'react';
 import GiftedMessenger from 'react-native-gifted-messenger';
 import Communications from 'react-native-communications';
@@ -16,15 +16,8 @@ import {
 
 class Chat extends Component {
 
-  constructor(props) {
+	constructor(props) {
     super(props);
-
-    this.state = {
-      messages: this.props.messages,
-      isLoadingEarlierMessages: false,
-      typingMessage: '',
-      allLoaded: false,
-    };
   }
 
   componentDidMount() {
@@ -37,7 +30,10 @@ class Chat extends Component {
   handleSend(message = {}) {
     message.id = Math.round(Math.random() * 10000);
 
-		this.props.postMessage(message);
+		this.props.postMessage({
+			chatId: this.props.chatId,
+			message: message
+		});
   }
 
   onLoadEarlierMessages() {
@@ -66,7 +62,7 @@ class Chat extends Component {
         }}
 
         autoFocus={false}
-        messages={this.state.messages}
+        messages={this.props.messages}
         handleSend={this.handleSend.bind(this)}
         maxHeight={MAX_HEIGHT}
 
@@ -82,9 +78,8 @@ class Chat extends Component {
         handleUrlPress={this.handleUrlPress}
         handleEmailPress={this.handleEmailPress}
 
-        isLoadingEarlierMessages={this.props.chatViewState.isLoadingEarlierMessages}
-
-        typingMessage={this.props.chatViewState.typingMessage}
+				// TODO!
+        isLoadingEarlierMessages={false}
       />
     );
   }

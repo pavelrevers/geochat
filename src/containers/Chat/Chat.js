@@ -1,19 +1,21 @@
 'use strict'
 
 import { connect } from 'react-redux';
-import { loadErlierMessages, postMessage } from '../../ducks/messages';
+import { bindActionCreators } from 'redux';
+import { loadEarlierMessages, postMessage } from '../../ducks/messages';
 import Chat from '../../components/Chat';
 
 const stateToProps = (state) => {
   return {
     messages: state.messages,
-		chatView: state.chatView
+		chatView: state.chatView,
+		chatId: state.router.params.id
   }
 }
 
 const dispatchToProps = (dispatch) => {
   return bindActionCreators({
-    loadErlierMessages,
+    loadEarlierMessages,
 		postMessage
   }, dispatch)
 }
