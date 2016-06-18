@@ -1,0 +1,4 @@
+{
+  "name": "Router container",
+  "main": "./Router.js"
+}
