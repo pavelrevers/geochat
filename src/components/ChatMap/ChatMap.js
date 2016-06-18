@@ -19,7 +19,8 @@ class ChatMap extends Component {
           style={styles.map}
           mapType='satellite'
           region={this.props.region}
-          onRegionChangeComplete={this.props.updateRegion}>
+          onRegionChangeComplete={this.props.updateRegion}
+          onPress={(e) => this.props.startNewChatCreation({coordinate: e.nativeEvent.coordinate})}>
           {
             this.props.chatDots.map(({id, longitude, latitude, title}) => (
               <MapView.Marker
@@ -34,6 +35,14 @@ class ChatMap extends Component {
                 }}
               />
             ))
+          }
+          {
+            this.props.newChatInProgress && (
+              <MapView.Marker
+                key='newChatId'
+                coordinate={this.props.newChatCoordinate}
+              />
+            )
           }
         </MapView>
       </View>
