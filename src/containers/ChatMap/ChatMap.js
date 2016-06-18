@@ -1,7 +1,9 @@
 'use strict'
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import ChatMap from '../../components/ChatMap';
+import { updateDots } from '../../ducks/chatDots.js';
 
 const stateToProps = (state) => {
   return {
@@ -9,4 +11,10 @@ const stateToProps = (state) => {
   }
 }
 
-export default connect(stateToProps)(ChatMap);
+const dispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    updateDots
+  }, dispatch)
+}
+
+export default connect(stateToProps, dispatchToProps)(ChatMap);

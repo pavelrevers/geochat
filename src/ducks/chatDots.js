@@ -1,30 +1,25 @@
 // Actions
 const LOAD = 'geochat/chatDots/LOAD';
+const UPDATE = 'geochat/chatDots/UPDATE';
 
-const chatsDots = [
-  {
-    id: '1',
-    longitude: 37.618423,
-    latitude: 55.751244,
-    title: 'One'
-  },
-  {
-    id: '2',
-    longitude: 37.619423,
-    latitude: 55.751244,
-    title: 'Two'
-  }
-]
+const chatsDots = [];
 
 // Reducer
 export default function reducer(state = chatsDots, action = {}) {
   switch (action.type) {
-    // do reducer stuff
-    default: return state;
+    case UPDATE:
+      return action.payload;
+    default:
+      return state;
   }
 }
 
-// Action Creators
-export function loadWidgets() {
-  return { type: LOAD };
+export const updateDots = ({latitude, longitude, latitudeDelta, longitudeDelta}) => (dispatch) => {
+  let url = `https://api.geochats.insanecoders.ru/v1/geo/${[latitude, longitude, latitudeDelta, longitudeDelta].join(',')}/chats`
+
+  fetch(url)
+    .then((resp) => resp.json())
+    .then((data) => {
+      dispatch({type: UPDATE, payload: data});
+    })
 }

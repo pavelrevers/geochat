@@ -8,13 +8,12 @@ import MapView from 'react-native-maps';
 class ChatMap extends Component {
   constructor(props) {
     super(props);
-    const region = {
+    props.updateDots({
       longitude: 37.618423,
       latitude: 55.751244,
-      latitudeDelta: 0.005,
-      longitudeDelta: 0.005
-    };
-    this.state = {region};
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05
+    })
   }
   render() {
     return (
@@ -22,7 +21,13 @@ class ChatMap extends Component {
         <MapView
           style={styles.map}
           mapType='satellite'
-          region={this.state.region}>
+          region={{
+            longitude: 37.618423,
+            latitude: 55.751244,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05
+          }}
+          onRegionChangeComplete={this.props.updateDots}>
           {
             this.props.chatDots.map(({id, longitude, latitude, title}) => (
               <MapView.Marker
