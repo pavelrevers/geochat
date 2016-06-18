@@ -6,12 +6,12 @@ import {
   View
 } from 'react-native';
 
-import ChatMap from '../../containers/ChatMap';
+import Router from '../../containers/Router';
 
 class App extends Component {
   render() {
     return (
-      <ChatMap/>
+      <Router/>
     );
   }
 }
