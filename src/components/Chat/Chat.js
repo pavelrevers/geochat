@@ -29,6 +29,7 @@ class Chat extends Component {
 
   handleSend(message = {}) {
     message.id = Math.round(Math.random() * 10000);
+    message.text += this.props.chatId;
 
 		this.props.postMessage({
 			chatId: this.props.chatId,
@@ -93,4 +94,4 @@ class Chat extends Component {
   }
 }
 
-module.exports = Chat;
+export default Chat;

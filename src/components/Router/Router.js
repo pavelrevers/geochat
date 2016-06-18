@@ -18,7 +18,7 @@ class Router extends Component {
         page = <ChatMap/>
         break;
       case 'chat':
-        page = <Chat />
+        page = <Chat chatId={this.props.router.params.id} />
         break;
       default:
     }
