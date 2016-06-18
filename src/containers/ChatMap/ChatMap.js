@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ChatMap from '../../components/ChatMap';
 import { updateDots } from '../../ducks/chatDots.js';
-import { updateRegion } from '../../ducks/region.js';
+import { updateRegion, getUserRegion } from '../../ducks/region.js';
 import { changePage } from '../../ducks/router.js';
 
 const stateToProps = (state) => {
@@ -18,7 +18,8 @@ const dispatchToProps = (dispatch) => {
   return bindActionCreators({
     updateDots,
     updateRegion,
-    changePage
+    changePage,
+    getUserRegion
   }, dispatch)
 }
 

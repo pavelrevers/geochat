@@ -21,3 +21,14 @@ export default function reducer(state = initialRegion, {type, payload}) {
 export const updateRegion = (region) => (
   {type: UPDATE, payload: region}
 );
+
+export const getUserRegion = () => dispatch => {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      var initialPosition = JSON.stringify(position);
+      console.log(initialPosition);
+    },
+    (error) => alert(error.message),
+    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+  );
+}

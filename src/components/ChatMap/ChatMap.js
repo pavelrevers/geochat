@@ -10,6 +10,7 @@ class ChatMap extends Component {
   constructor(props) {
     super(props);
     props.updateDots(props.region)
+    props.getUserRegion()
   }
   render() {
     return (
