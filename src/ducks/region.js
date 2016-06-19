@@ -5,8 +5,8 @@ const UPDATE = 'geochat/region/UPDATE';
 const UPDATE_COORDINATE = 'geochat/region/UPDATE';
 
 const initialRegion = {
-  // longitude: 37.618423,
-  // latitude: 55.751244,
+  longitude: 37.618423,
+  latitude: 55.751244,
   latitudeDelta: 0.02,
   longitudeDelta: 0.02
 };
