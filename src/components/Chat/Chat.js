@@ -41,7 +41,7 @@ class Chat extends Component {
 
   handleSend(message = {}) {
     message.id = Math.round(Math.random() * 10000);
-    message.name = this.props.userName
+    message.name = this.props.userName;
 
     this.props.postMessage({
       chatId: this.props.id,

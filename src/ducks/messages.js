@@ -16,11 +16,7 @@ const MESSAGE_STATUSES = {
 
 let initialMessages = [];
 
-let remapId = (msg) => {
-  var newMsg = {...msg}
-  newMsg.uniqueId = msg.id;
-  return newMsg;
-}
+let remapId = (msg) => ({uniqueId: msg.id, ...msg})
 let addSentStatus = (msg) => ({ status: MESSAGE_STATUSES.SENT, ...msg })
 let addSendingStatus = (msg) => ({ status: MESSAGE_STATUSES.SENDING, ...msg })
 let addFailedStatus = (msg) => ({ status: MESSAGE_STATUSES.SENDING_FAILED, ...msg })
@@ -80,8 +76,6 @@ export const loadEarlierMessages = ({chatId, startId, limit = DEFAULT_MESSAGES_A
 export const postMessage = ({chatId, message}) => (dispatch) => {
 
   dispatch({type: ADD_MESSAGE, payload: message});
-
-  console.log(message)
 
   let url = `${API_CHATS_URL}/${chatId}/message`;
 
