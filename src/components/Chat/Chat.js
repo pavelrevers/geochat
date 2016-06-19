@@ -85,7 +85,7 @@ class Chat extends Component {
           maxHeight={MAX_HEIGHT}
 
           // TODO: do not show, when all messages are loaded
-          loadEarlierMessagesButton={true}
+          loadEarlierMessagesButton={false}
           onLoadEarlierMessages={this.onLoadEarlierMessages.bind(this)}
 
           senderName='Awesome Developer'
