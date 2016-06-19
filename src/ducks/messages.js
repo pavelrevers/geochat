@@ -34,25 +34,26 @@ const FIRST_MESSAGES = [
 
 let initialMessages = [];
 
+let remapId = (msg) => { uniqueId: msg.id, ...msg }
+let addSentStatus = (msg) => { status: MESSAGE_STATUSES.SENT, ...msg }
+let addSendingStatus = (msg) => { status: MESSAGE_STATUSES.SENDING, ...msg }
+
 // Reducer
-export default function reducer(state = initialMessages, action = {}) {
-  switch (action.type) {
+export default function reducer(state = initialMessages, {type, payload}) {
+  switch (type) {
     case ADD_MESSAGES_TO_START:
-      let messagesToAdd = [...action.payload].map(remapId).map(addSentStatus);
+      let messagesToAdd = [...payload].map(remapId).map(addSentStatus);
 
       return [...messagesToAdd, ...state];
     case ADD_MESSAGE:
-      let messageToAdd = addSendingStatus(remapId(action.payload));
+      let messageToAdd = addSendingStatus(remapId(payload));
 
       return [...state, messageToAdd]
     case UPDATE_MESSAGE:
       let messages = [...state];
-      let oldMessage = action.payload.oldMessage;
-      let messageToUpdate = addSentStatus(remapId(action.payload.validatedMessage));
+      let oldMessage = payload.oldMessage;
+      let messageToUpdate = addSentStatus(remapId(payload.validatedMessage));
       let messageIndex = messages.findIndex(m => m.id === oldMessage.id);
-      // console.log('Message updated:', messageToUpdate)
-      console.log(messageToUpdate);
-      console.log(messages);
 
       messages[messageIndex] = messageToUpdate;
 
@@ -102,16 +103,4 @@ export const postMessage = ({chatId, message}) => (dispatch) => {
   //     dispatch({type: UPDATE_MESSAGE, payload: validatedMessage});
   //   })
   //   // TODO: process failing
-}
-
-function remapId(message) {
-  return { uniqueId: message.id, ...message };
-}
-
-function addSentStatus(message) {
-  return { status: MESSAGE_STATUSES.SENT, ...message };
-}
-
-function addSendingStatus(message) {
-  return { status: MESSAGE_STATUSES.SENDING, ...message };
 }
