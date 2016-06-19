@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  Text,
+  TouchableHighlight,
+  StatusBar
 } from 'react-native';
 import MapView from 'react-native-maps';
 import Link from '../../containers/Link';
+import Icon from 'react-native-vector-icons/Entypo';
+import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 
 class ChatMap extends Component {
   constructor(props) {
@@ -12,23 +17,38 @@ class ChatMap extends Component {
     props.updateDots(props.region)
     props.getUserRegion()
   }
+
+  componentWillMount() {
+    // https://github.com/facebook/react-native/issues/1403 prevents this to work for initial load
+    Promise.all([
+      Icon.getImageSource('chat', 30, '#3498db'),
+      Icon.getImageSource('chat', 30, '#e74c3c')
+    ])
+      .then(([chatIcon, newChatIcon]) => {
+        this.setState({ chatIcon, newChatIcon });
+      });
+  }
+
   render() {
     return (
       <View style={styles.container}>
+      <StatusBar
+        barStyle="default"/>
         <MapView
           style={styles.map}
-          mapType='satellite'
+          mapType='standard'
           region={this.props.region}
           onRegionChangeComplete={this.props.updateRegion}
-          onPress={(e) => this.props.startNewChatCreation({coordinate: e.nativeEvent.coordinate})}>
+          onPress={this.props.newChatInProgress ? (e) => this.props.setNewChatCoordinate({coordinate: e.nativeEvent.coordinate}) : () => null}>
           {
-            this.props.chatDots.map(({id, longitude, latitude, title}) => (
+            !this.props.newChatInProgress && this.props.chatDots.map(({id, longitude, latitude, title}) => (
               <MapView.Marker
                 key={id}
                 coordinate={{
                   longitude,
                   latitude
                 }}
+                image={this.state.chatIcon}
                 title={title}
                 onSelect={(data) => {
                   this.props.changePage({name: 'chat', params: {id}})
@@ -37,14 +57,36 @@ class ChatMap extends Component {
             ))
           }
           {
-            this.props.newChatInProgress && (
+            this.props.newChatInProgress && this.props.newChatCoordinate && (
               <MapView.Marker
                 key='newChatId'
+                image={this.state.newChatIcon}
                 coordinate={this.props.newChatCoordinate}
               />
             )
           }
         </MapView>
+        {
+          !this.props.newChatInProgress && (
+            <TouchableHighlight style={styles.button} activeOpacity={10} underlayColor="aliceblue" onPress={this.props.startNewChatCreation}>
+              <IoniconsIcon name="ios-add-circle" size={72} color="#2ecc71" />
+            </TouchableHighlight>
+          )
+        }
+        {
+          this.props.newChatInProgress && this.props.newChatCoordinate && (
+            <TouchableHighlight style={styles.button} activeOpacity={10} underlayColor="aliceblue" onPress={this.props.submitNewChat}>
+              <IoniconsIcon name="ios-checkmark-circle" size={72} color="#2ecc71" />
+            </TouchableHighlight>
+          )
+        }
+        {
+          this.props.newChatInProgress && !this.props.newChatCoordinate && (
+            <TouchableHighlight style={styles.button} activeOpacity={10} underlayColor="aliceblue" onPress={this.props.submitNewChat}>
+              <IoniconsIcon name="ios-close-circle" size={72} color="#e74c3c" />
+            </TouchableHighlight>
+          )
+        }
       </View>
     );
   }
@@ -68,12 +110,10 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: 0,
-    right: 0,
-    borderWidth: 1,
-    width: 40,
-    height: 40,
-    borderColor: '#444',
+    bottom: 40,
+    right: 40,
+    width: 72,
+    height: 72,
   }
 });
 
