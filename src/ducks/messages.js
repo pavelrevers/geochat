@@ -1,39 +1,3 @@
-// const StoreData = {
-//   messages: [
-//     {
-//       text: 'Are you building a chat app?',
-//       name: 'React-Bot',
-//       image: {uri: 'https://facebook.github.io/react/img/logo_og.png'},
-//       position: 'left',
-//       date: new Date(2016, 3, 14, 13, 0),
-//       uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
-//       status: 'Статус-фигатус'
-//     },
-//     {
-//       text: "Yes, and I use Gifted Messenger!",
-//       name: 'Awesome Developer',
-//       image: null,
-//       position: 'right',
-//       date: new Date(2016, 3, 14, 13, 1),
-//       uniqueId: Math.round(Math.random() * 10000), // simulating server-side unique id generation
-//       status: 'Seen'
-//     },
-//   ],
-//
-//   chatViewState: {
-//     isLoadingEarlierMessages: false,
-//     typingMessage: "Паша печатает сообщение"
-//   }
-// }
-//
-// class AppWrap extends Component {
-//   render() {
-//     <View>
-//       <ChatContainer props={StoreData} />
-//     </View>
-//   }
-// }
-
 // Actions
 // const LOAD = 'geochat/chats/LOAD';
 const ADD_MESSAGES_TO_START = 'geochat/chats/ADD_MESSAGES_TO_START';
@@ -43,9 +7,9 @@ const DEFAULT_MESSAGES_AMOUNT_LIMIT = 50;
 const API_CHATS_URL = 'https://api.geochats.insanecoders.ru/v1/chats';
 
 const MESSAGE_STATUSES = {
-  SENDING: 'Паша доставляет сообщение...',
-  SENT: 'Паша уже доставил сообщение',
-  SENDING_FAILED: 'Паша не доставил сообщение, потому что забухал'
+  SENDING: 'Паша доставляет...',
+  SENT: 'Паша доставил.',
+  SENDING_FAILED: 'Паша не доставил, потому что забухал'
 }
 
 const FIRST_MESSAGES = [
