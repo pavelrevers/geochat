@@ -16,7 +16,11 @@ const MESSAGE_STATUSES = {
 
 let initialMessages = [];
 
-let remapId = (msg) => ({uniqueId: msg.id, ...msg})
+let remapId = (msg) => {
+  var newMsg = {...msg}
+  newMsg.uniqueId = msg.id;
+  return newMsg;
+}
 let addSentStatus = (msg) => ({ status: MESSAGE_STATUSES.SENT, ...msg })
 let addSendingStatus = (msg) => ({ status: MESSAGE_STATUSES.SENDING, ...msg })
 let addFailedStatus = (msg) => ({ status: MESSAGE_STATUSES.SENDING_FAILED, ...msg })
@@ -77,23 +81,23 @@ export const postMessage = ({chatId, message}) => (dispatch) => {
 
   dispatch({type: ADD_MESSAGE, payload: message});
 
+  console.log(message)
+
   let url = `${API_CHATS_URL}/${chatId}/message`;
 
   fetch(url, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      text: message.text,
-      name: message.name
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: message.text,
+        name: message.name
+      })
     })
-  })
+    .then(response => response.json())
     .then(validatedMessage => {
-
-      // validatedMessage.date = new Date(validatedMessage.date);
-
       dispatch({type: UPDATE_MESSAGE, payload: {
         oldMessage: message,
         validatedMessage: validatedMessage
