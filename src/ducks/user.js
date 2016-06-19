@@ -5,7 +5,7 @@ const USER_LOGIN = 'geochat/user/USER_LOGIN';
 const USER_LOGIN_ERROR = 'geochat/user/USER_LOGIN_ERROR';
 const USER_NAME_CHANGE = 'geochat/user/USER_NAME_CHANGE';
 const USER_PHONE_CHANGE = 'geochat/user/USER_PHONE_CHANGE';
-const API_USER_URL = 'https://api.geochats.insanecoders.ru/v1/user';
+const API_USER_URL = 'https://api.geochats.insanecoders.ru/api/v1/user';
 
 const initialUser = {};
 
@@ -46,7 +46,7 @@ export const login = () => (dispatch, getState) => {
       type: USER_LOGIN,
       payload: { token: fakeResponse.token }
     });
-    
+
     dispatch(changePage({ name: 'map' }))
   }, 300);
 

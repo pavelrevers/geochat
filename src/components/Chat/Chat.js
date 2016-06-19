@@ -5,7 +5,7 @@ import { Component } from 'react';
 import GiftedMessenger from 'react-native-gifted-messenger';
 import Communications from 'react-native-communications';
 import NavigationBar from 'react-native-navbar';
-import _ from 'lodash';
+import { first } from 'lodash';
 
 import {
   Linking,
@@ -15,6 +15,16 @@ import {
   Navigator,
   View
 } from 'react-native';
+
+let extendMessagesWithPositions = (messages, userName) => {
+  return messages.map(msg => {
+    if (msg.name !== userName) {
+      msg.position = 'left';
+    }
+
+    return msg;
+  });
+}
 
 class Chat extends Component {
 
@@ -31,6 +41,7 @@ class Chat extends Component {
 
   handleSend(message = {}) {
     message.id = Math.round(Math.random() * 10000);
+    message.name = this.props.userName
 
     this.props.postMessage({
       chatId: this.props.id,
@@ -41,12 +52,13 @@ class Chat extends Component {
   onLoadEarlierMessages() {
     this.props.loadEarlierMessages({
       chatId: this.props.id,
-      startId: _.first(this.props.messages).id
+      startId: first(this.props.messages).id
     })
   }
 
   handleNavbarLeftButtonTap() {
     this.props.changePage({name: 'map'})
+    this.props.clearMessages();
   }
 
   render() {
@@ -62,7 +74,7 @@ class Chat extends Component {
       handler: this.handleNavbarLeftButtonTap.bind(this)
     };
 
-    let titleConfig = { title: this.props.id };
+    let titleConfig = { title: 'Starbucks NY' };
 
     return (
       <View>
@@ -79,7 +91,7 @@ class Chat extends Component {
           }}
 
           autoFocus={false}
-          messages={this.props.messages}
+          messages={extendMessagesWithPositions(this.props.messages, this.props.userName)}
           handleSend={this.handleSend.bind(this)}
           maxHeight={MAX_HEIGHT}
 
@@ -87,7 +99,7 @@ class Chat extends Component {
           loadEarlierMessagesButton={false}
           onLoadEarlierMessages={this.onLoadEarlierMessages.bind(this)}
 
-          senderName='Awesome Developer'
+          senderName={this.props.name}
           senderImage={null}
           displayNames={true}
 

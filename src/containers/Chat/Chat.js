@@ -2,7 +2,7 @@
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loadEarlierMessages, postMessage } from '../../ducks/messages';
+import { loadEarlierMessages, postMessage, clearMessages } from '../../ducks/messages';
 import { changePage } from '../../ducks/router.js';
 import Chat from '../../components/Chat';
 
@@ -20,7 +20,8 @@ const dispatchToProps = (dispatch) => {
   return bindActionCreators({
     loadEarlierMessages,
 		postMessage,
-    changePage
+    changePage,
+    clearMessages
   }, dispatch)
 }
 
