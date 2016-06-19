@@ -55,7 +55,7 @@ class Home extends Component {
                 style={styles.button}
                 onPress={this.props.login}
               >
-                Войти!
+                Войти
               </Button>
             </View>
           </View>
@@ -96,6 +96,7 @@ var styles = StyleSheet.create({
     padding: 5,
   },
   label: {
+    marginTop: 5,
     alignItems: 'flex-start',
     marginRight: 10,
     paddingTop: 2,
@@ -109,7 +110,8 @@ var styles = StyleSheet.create({
   button: {
     backgroundColor: 'transparent',
     color: 'black',
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     borderWidth: 1,
     borderColor: '#0f0f0f'
   }
