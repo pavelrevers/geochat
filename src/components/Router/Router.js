@@ -8,6 +8,7 @@ import {
 import MapView from 'react-native-maps';
 import ChatMap from '../../containers/ChatMap';
 import Chat from '../../containers/Chat';
+import Home from '../../containers/Home';
 import Link from '../../containers/Link';
 
 class Router extends Component {
@@ -19,6 +20,9 @@ class Router extends Component {
         break;
       case 'chat':
         page = <Chat chatId={this.props.router.params.id} />
+        break;
+      case 'home':
+        page = <Home/>
         break;
       default:
     }
