@@ -6,7 +6,7 @@ import ChatMap from '../../components/ChatMap';
 import { updateDots } from '../../ducks/chatDots.js';
 import { updateRegion, getUserRegion } from '../../ducks/region.js';
 import { changePage } from '../../ducks/router.js';
-import { startNewChatCreation } from '../../ducks/newChat.js';
+import { startNewChatCreation, submitNewChat, setNewChatCoordinate } from '../../ducks/newChat.js';
 
 const stateToProps = (state) => {
   return {
@@ -23,7 +23,9 @@ const dispatchToProps = (dispatch) => {
     updateRegion,
     changePage,
     getUserRegion,
-    startNewChatCreation
+    startNewChatCreation,
+    submitNewChat,
+    setNewChatCoordinate
   }, dispatch)
 }
 

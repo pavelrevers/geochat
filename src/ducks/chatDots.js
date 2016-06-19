@@ -15,7 +15,7 @@ export default function reducer(state = chatsDots, action = {}) {
 }
 
 export const updateDots = ({latitude, longitude, latitudeDelta, longitudeDelta}) => (dispatch) => {
-  let url = `https://api.geochats.insanecoders.ru/v1/geo/${[latitude, longitude, latitudeDelta, longitudeDelta].join(',')}/chats`
+  let url = `https://api.geochats.insanecoders.ru/api/v1/geo/${[latitude, longitude, latitudeDelta, longitudeDelta].join(',')}`
 
   fetch(url)
     .then((resp) => resp.json())
