@@ -67,6 +67,7 @@ export const loadEarlierMessages = ({chatId, startId, limit = DEFAULT_MESSAGES_A
 	let url = `${API_CHATS_URL}/${chatId}/messages?startid=${startId}&limit=${limit}`;
 
   fetch(url)
+    .then(response => response.json())
     .then(earlierMessages => {
       dispatch({type: ADD_MESSAGES_TO_START, payload: earlierMessages});
     })

@@ -32,8 +32,7 @@ class Chat extends Component {
 
   componentDidMount() {
     this.props.loadEarlierMessages({
-      chatId: this.props.id,
-      startId: null
+      chatId: this.props.id
     })
   }
 
