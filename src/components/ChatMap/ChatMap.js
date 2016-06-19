@@ -14,8 +14,17 @@ import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 class ChatMap extends Component {
   constructor(props) {
     super(props);
-    props.updateDots(props.region)
-    props.getUserRegion()
+    props.getUserRegion();
+
+    this.state = {};
+
+    Promise.all([
+      Icon.getImageSource('chat', 30, '#3498db'),
+      Icon.getImageSource('chat', 30, '#e74c3c')
+    ])
+      .then(([chatIcon, newChatIcon]) => {
+        this.setState({ chatIcon, newChatIcon });
+      });
   }
 
   componentWillMount() {

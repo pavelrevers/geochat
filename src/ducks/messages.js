@@ -4,7 +4,7 @@ const ADD_MESSAGES_TO_START = 'geochat/chats/ADD_MESSAGES_TO_START';
 const ADD_MESSAGE = 'geochat/chats/ADD_MESSAGE';
 const UPDATE_MESSAGE = 'geochat/chats/UPDATE_MESSAGE';
 const DEFAULT_MESSAGES_AMOUNT_LIMIT = 50;
-const API_CHATS_URL = 'https://api.geochats.insanecoders.ru/v1/chats';
+const API_CHATS_URL = 'https://api.geochats.insanecoders.ru/api/v1/chat';
 
 const MESSAGE_STATUSES = {
   SENDING: 'Паша доставляет...',
@@ -50,9 +50,6 @@ export default function reducer(state = initialMessages, action = {}) {
       let oldMessage = action.payload.oldMessage;
       let messageToUpdate = addSentStatus(remapId(action.payload.validatedMessage));
       let messageIndex = messages.findIndex(m => m.id === oldMessage.id);
-      // console.log('Message updated:', messageToUpdate)
-      console.log(messageToUpdate);
-      console.log(messages);
 
       messages[messageIndex] = messageToUpdate;
 
@@ -65,11 +62,11 @@ export default function reducer(state = initialMessages, action = {}) {
 export const loadEarlierMessages = ({chatId, startId, limit = DEFAULT_MESSAGES_AMOUNT_LIMIT}) => (dispatch) => {
 	let url = `${API_CHATS_URL}/${chatId}/messages?startid=${startId}&limit=${limit}`;
 
-  if (!startId) {
-    setTimeout(() => {
-      dispatch({type: ADD_MESSAGES_TO_START, payload: FIRST_MESSAGES});
-    }, 500);
-  }
+  // if (!startId) {
+  //   setTimeout(() => {
+  //     dispatch({type: ADD_MESSAGES_TO_START, payload: FIRST_MESSAGES});
+  //   }, 500);
+  // }
 
   fetch(url)
     .then(earlierMessages => {

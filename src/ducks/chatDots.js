@@ -15,11 +15,15 @@ export default function reducer(state = chatsDots, action = {}) {
 }
 
 export const updateDots = ({latitude, longitude, latitudeDelta, longitudeDelta}) => (dispatch) => {
+  console.log(latitude, longitude, latitudeDelta, longitudeDelta)
   let url = `https://api.geochats.insanecoders.ru/api/v1/geo/${[latitude, longitude, latitudeDelta, longitudeDelta].join(',')}`
+  if ((latitude > 1 || latitude < -1) && (longitude > 1 || longitude < -1)) {
+    fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => {
+        dispatch({type: UPDATE, payload: data});
+      })
+      .catch((e) => {console.error(e)})
+  }
 
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      dispatch({type: UPDATE, payload: data});
-    })
 }
