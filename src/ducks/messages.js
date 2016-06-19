@@ -92,6 +92,7 @@ export const postMessage = ({chatId, message}) => (dispatch) => {
     })
     .then(response => response.json())
     .then(validatedMessage => {
+      console.log(validatedMessage)
       dispatch({type: UPDATE_MESSAGE, payload: {
         oldMessage: message,
         validatedMessage: validatedMessage

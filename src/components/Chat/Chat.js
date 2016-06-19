@@ -18,11 +18,9 @@ import {
 
 let extendMessagesWithPositions = (messages, userName) => {
   return messages.map(msg => {
-    if (msg.name !== userName) {
-      msg.position = 'left';
-    }
+    let position = (msg.name === userName) ? 'right' : 'left';
 
-    return msg;
+    return {...msg, position};
   });
 }
 
