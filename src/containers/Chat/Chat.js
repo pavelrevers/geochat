@@ -10,7 +10,9 @@ const stateToProps = (state) => {
   return {
     messages: state.messages,
 		chatView: state.chatView,
-		id: state.router.params.id
+		id: state.router.params.id,
+    userToken: state.user.token,
+    userName: state.user.name
   }
 }
 

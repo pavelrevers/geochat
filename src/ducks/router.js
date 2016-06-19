@@ -2,10 +2,7 @@
 const CHANGE_PAGE = 'geochat/router/CHANGE_PAGE';
 
 const initialRoute = {
-  name: 'chat',
-  params: {
-    id: 'deadbeef1'
-  }
+  name: 'home'
 };
 
 // Reducer

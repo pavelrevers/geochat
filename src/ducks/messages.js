@@ -34,9 +34,9 @@ const FIRST_MESSAGES = [
 
 let initialMessages = [];
 
-let remapId = (msg) => { uniqueId: msg.id, ...msg }
-let addSentStatus = (msg) => { status: MESSAGE_STATUSES.SENT, ...msg }
-let addSendingStatus = (msg) => { status: MESSAGE_STATUSES.SENDING, ...msg }
+let remapId = (msg) => ({ uniqueId: msg.id, ...msg })
+let addSentStatus = (msg) => ({ status: MESSAGE_STATUSES.SENT, ...msg })
+let addSendingStatus = (msg) => ({ status: MESSAGE_STATUSES.SENDING, ...msg })
 
 // Reducer
 export default function reducer(state = initialMessages, {type, payload}) {
